@@ -4,7 +4,7 @@
   "description": "test task for infotecs",
   "main": "app.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open",
+    "start": "webpack serve --mode development --open",
     "build": "webpack --mode production"
   },
   "repository": {
@@ -17,13 +17,14 @@
   ],
   "author": "Bulakh <bulakh94@gmail.com>",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bulakh/table_test/issues"
-  },
   "homepage": "https://github.com/bulakh/table_test#readme",
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.5.1",
+    "editorconfig": "^0.15.3",
+    "eslint": "^8.5.0",
     "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.7.1"

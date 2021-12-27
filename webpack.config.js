@@ -1,6 +1,6 @@
-const path = require('path');
-const HTMLPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require('path');
 
 module.exports = {
     entry: './src/app.js',
@@ -12,9 +12,19 @@ module.exports = {
         port: 3000,
     },
     plugins: [
-        new HTMLPlugin({
-            template: './src/index.html',
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, 'src/index.html'),
+            scriptLoading: 'blocking',
         }),
         new CleanWebpackPlugin()
-    ]
+    ],
+    module: {
+        rules: [
+          {
+            test: /\.css$/i,
+            use: ['style-loader', 'css-loader'],
+          },
+        ],
+    },
+
 }
