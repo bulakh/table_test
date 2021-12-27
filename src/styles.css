@@ -1,0 +1,16 @@
+body {
+  background: plum;
+  color: green;
+}
+
+.box {
+  background-color: hotpink;
+  color: khaki;
+}
+
+
+.box2 {
+  font-size: 30px;
+  background-color: aqua;
+  color: black;
+}
