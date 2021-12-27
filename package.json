@@ -1,0 +1,31 @@
+{
+  "name": "table_test",
+  "version": "1.0.0",
+  "description": "test task for infotecs",
+  "main": "app.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bulakh/table_test.git"
+  },
+  "keywords": [
+    "js",
+    "javascript"
+  ],
+  "author": "Bulakh <bulakh94@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bulakh/table_test/issues"
+  },
+  "homepage": "https://github.com/bulakh/table_test#readme",
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.1"
+  }
+}
