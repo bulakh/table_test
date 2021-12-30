@@ -6,16 +6,23 @@ class TablePresenter {
     this._element = element;
     this._model = model;
 
+    this._allUsers = this._model.getUsers();
+
     this.clearUsers = this.clearUsers.bind(this);
-    this.getCount = this.getCount.bind(this);
+    this.setCountSymbols = this.setCountSymbols.bind(this);
+    this.sort = this.sort.bind(this);
   }
 
-  render(count) {
-    const allUsers = this._model.getUsers();
+  init() {
+    this.render();
+    this.setCountSymbols();
+  }
+
+  render() {
     this._element.innerHTML = '';
 
-    allUsers.map(user => {
-      render(this._element, new User(user, count).getElement(), RenderPosition.BEFOREEND);
+    this._allUsers.map(user => {
+      render(this._element, new User(user, this._model.getCountSymbols()).getElement(), RenderPosition.BEFOREEND);
     })
   }
 
@@ -24,10 +31,15 @@ class TablePresenter {
     this.render();
   }
 
-  getCount() {
+  setCountSymbols() {
     const blockAbout = document.querySelector('.block-about');
+    this._model.setCountSymbols(blockAbout);
+    this.render();
+  }
 
-    this.render(this._model.getCount(blockAbout));
+  sort(evt) {
+    this._allUsers = this._model.getSortedUsers(evt.target.value);
+    this.render();
   }
 }
 

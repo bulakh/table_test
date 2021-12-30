@@ -37,6 +37,10 @@ h1 {
   width: 50%;
 }
 
+.header {
+  text-align: center;
+}
+
 .table {
   width: 100%;
   border: 1px solid black;
@@ -48,6 +52,6 @@ h1 {
   text-align: center;
 }
 
-.header {
-  text-align: center;
+.select-wrap {
+  display: inline-block;
 }
