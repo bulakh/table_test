@@ -1,16 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Martel+Sans:wght@400;600;700&display=swap');
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
 body {
-  background: plum;
-  color: green;
+  padding: 15px;
+  margin: 0;
+
+  font-family: 'Arvo', serif;
 }
 
-.box {
-  background-color: hotpink;
-  color: khaki;
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  border: 0;
 }
 
-
-.box2 {
+h1 {
   font-size: 30px;
-  background-color: aqua;
-  color: black;
+}
+
+.table-wrap {
+  width: 50%;
+}
+
+.header {
+  text-align: center;
+}
+
+.table {
+  width: 100%;
+  border: 1px solid black;
+}
+
+.table,tr ,td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.select-wrap {
+  display: inline-block;
 }
