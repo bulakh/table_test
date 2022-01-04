@@ -1,10 +1,12 @@
+import { tagType } from "../const";
 import { createElement } from "../utils";
+import Abstract from "./Abstract";
 
 const createUserTemplate = (user, count) => {
   const {name, about, eyeColor} = user;
   const {firstName, lastName} = name;
 
-  return `<tr>
+  return `<tr class="table__row">
     <td>${firstName}</td>
     <td>${lastName}</td>
     <td class="block-about">
@@ -14,26 +16,27 @@ const createUserTemplate = (user, count) => {
   </tr>`
 }
 
-export default class User {
+export default class User extends Abstract {
   constructor(user, count) {
+    super();
     this._user = user;
     this._count = count;
     this._element = null;
+
+    this._showFormHandler = this._showFormHandler.bind(this);
   }
 
   getTemplate() {
     return createUserTemplate(this._user, this._count);
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
+  _showFormHandler(e) {
+    e.preventDefault();
+    this._callback.closeForm();
   }
 
-  removeElement() {
-    this._element = null;
+  setClickOpenFormHandler(callback) {
+    this._callback.closeForm = callback;
+    Array.from(this.getElement().querySelectorAll('.table__row')).map(row => row.addEventListener('click', this._showFormHandler));
   }
 }

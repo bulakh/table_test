@@ -6,4 +6,3 @@ export const sortType = {
   EYE_COLOR: 'eyeColor',
 }
 
-

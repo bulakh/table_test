@@ -46,7 +46,7 @@ class TableModel {
   }
 
   clear() {
-    this._users = [];
+    return this._users = [];
   }
 }
 
