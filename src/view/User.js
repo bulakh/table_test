@@ -1,5 +1,3 @@
-import { tagType } from "../const";
-import { createElement } from "../utils";
 import Abstract from "./Abstract";
 
 const createUserTemplate = (user, count) => {
@@ -21,22 +19,21 @@ export default class User extends Abstract {
     super();
     this._user = user;
     this._count = count;
-    this._element = null;
 
-    this._showFormHandler = this._showFormHandler.bind(this);
+    // this._showFormHandler = this._showFormHandler.bind(this);
   }
 
   getTemplate() {
     return createUserTemplate(this._user, this._count);
   }
 
-  _showFormHandler(e) {
-    e.preventDefault();
-    this._callback.closeForm();
-  }
+  // _showFormHandler(e) {
+  //   e.preventDefault();
+  //   this._callback.closeForm();
+  // }
 
-  setClickOpenFormHandler(callback) {
-    this._callback.closeForm = callback;
-    Array.from(this.getElement().querySelectorAll('.table__row')).map(row => row.addEventListener('click', this._showFormHandler));
-  }
+  // setClickOpenFormHandler(callback) {
+  //   this._callback.closeForm = callback;
+  //   Array.from(this.getElement().querySelectorAll('.table__row')).map(row => row.addEventListener('click', this._showFormHandler));
+  // }
 }

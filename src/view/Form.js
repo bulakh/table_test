@@ -1,10 +1,6 @@
-import { tagType } from "../const";
-import { createElement } from "../utils";
 import Abstract from "./Abstract";
 
 const createFormTemplate = () => {
-  // const {name, about, eyeColor} = user;
-  // const {firstName, lastName} = name;
 
   return `<form class="table-form">
     <button class="button-close" type="button">Close</button>
@@ -36,7 +32,6 @@ export default class Form extends Abstract {
   constructor() {
     super();
     // this._user = user;
-    this._element = null;
 
     this._closeClickFormHandler = this._closeClickFormHandler.bind(this);
   }

@@ -25,24 +25,15 @@ export const render = (container, child, place) => {
   }
 };
 
-// export const render = (container, element, place) => {
-//   switch (place) {
-//     case RenderPosition.AFTERBEGIN:
-//       container.prepend(element);
-//       break;
-//     case RenderPosition.BEFOREEND:
-//       container.append(element);
-//       break;
-//   }
-// };
+
 
 export const createElement = (template) => {
-  let newElement
+  let newElement;
 
-  if (template.slice(1, 3) === 'tr') {
-    newElement = document.createElement('tbody');
-  } else {
-    newElement = document.createElement('div');
+  newElement = document.createElement('div');
+
+  if (template.slice(1, 3) === 'tr' || template.slice(1, 3) === 'tb') {
+    newElement = document.createElement('table');
   }
 
   newElement.innerHTML = template;
