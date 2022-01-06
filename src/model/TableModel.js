@@ -1,8 +1,10 @@
-import { sortType } from "../const";
+// import { sortType } from "../const";
+import { sortUsers } from "../utils/sort";
 
 class TableModel {
   constructor (initialUsers = []) {
     this._users = [...initialUsers];
+    this._user = null;
     this._countSymbols = null;
   }
 
@@ -24,6 +26,24 @@ class TableModel {
     }
   }
 
+  setUser(e) {
+    this._user = this._users.find(user => user.id === e.currentTarget.dataset.id);
+  }
+
+  changeUsers(userData) {
+    this._user = {...this._user, ...userData};
+    this._users = this._users.map(user => {
+      if (user.id === this._user.id){
+        return this._user;
+      }
+      return user;
+    })
+  }
+
+  getUser() {
+    return this._user;
+  }
+
   getCountSymbols() {
     return this._countSymbols;
   }
@@ -31,23 +51,12 @@ class TableModel {
   getSortedUsers(sort) {
     const sortedUsers = this._users.slice()
 
-    switch (sort) {
-      case sortType.FIRST_NAME:
-        return sortedUsers.sort((a, b) => (a.name.firstName > b.name.firstName ? 1 : -1));
-      case sortType.LAST_NAME:
-        return sortedUsers.sort((a, b) => (a.name.lastName > b.name.lastName ? 1 : -1));
-      case sortType.ABOUT:
-        return sortedUsers.sort((a, b) => (a.about > b.about ? 1 : -1));
-      case sortType.EYE_COLOR:
-        return sortedUsers.sort((a, b) => (a.eyeColor > b.eyeColor ? 1 : -1));
-      default:
-        return this._users;
-    }
+    return sortUsers(sortedUsers, sort, this._users);
   }
 
-  clear() {
-    return this._users = [];
-  }
+  // clearUsers() {
+  //   return this._users = [];
+  // }
 }
 
 export default TableModel;

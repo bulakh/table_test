@@ -14,8 +14,6 @@ const createSortTemplate = () => {
 export default class Sort extends Abstract {
   constructor() {
     super();
-    // this._user = user;
-    // this._count = count;
 
     this._changeSortHandler = this._changeSortHandler.bind(this);
   }

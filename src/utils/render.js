@@ -1,4 +1,4 @@
-import Abstract from "./view/Abstract";
+import Abstract from "../view/Abstract";
 
 
 export const RenderPosition = {
@@ -24,8 +24,6 @@ export const render = (container, child, place) => {
       break;
   }
 };
-
-
 
 export const createElement = (template) => {
   let newElement;

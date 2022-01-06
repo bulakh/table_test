@@ -22,11 +22,11 @@ export default class UserList extends Abstract {
 
   _showFormHandler(e) {
     e.preventDefault();
-    this._callback.closeForm();
+    this._callback.openForm(e);
   }
 
   setClickOpenFormHandler(callback) {
-    this._callback.closeForm = callback;
+    this._callback.openForm = callback;
     Array.from(this.getElement().querySelectorAll('.table__row')).map(row => row.addEventListener('click', this._showFormHandler));
   }
 }
