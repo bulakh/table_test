@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Martel+Sans:wght@400;600;700&display=swap');
 
+:root {
+  --black: #00001a;
+  --grey: #eaeafb;
+}
+
 html {
   height: 100%;
   box-sizing: border-box;
@@ -16,6 +21,7 @@ body {
   margin: 0;
 
   font-family: 'Arvo', serif;
+  color: var(--black);
 }
 
 .visually-hidden {
@@ -40,12 +46,17 @@ ul {
 }
 
 .table-wrap {
-  display: flex;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: 50% 40%;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+      "table form"
+      "pagination .";
+  gap: 1% 2.5%;
 }
 
 .table-wrap__main {
-  width: 50%;
+  /* width: 50%; */
 }
 
 .header {
@@ -53,18 +64,19 @@ ul {
 }
 
 .table {
+  grid-area: table;
   width: 100%;
 }
 
 .table,tr ,td {
-  border: 1px solid black;
+  border: 1px solid var(--black);
   border-collapse: collapse;
   text-align: center;
 }
 
 .table__row:hover {
   cursor: pointer;
-  background-color: #e6e6e6;
+  background-color: var(--grey);
 }
 
 .select-wrap {
@@ -74,11 +86,11 @@ ul {
 /* Form */
 
 .table-form {
-  width: 40%;
+  grid-area: form;
   margin-top: 98px;
   padding: 30px;
 
-  border: 1px solid black;
+  border: 1px solid var(--black);
   border-radius: 5px;
 }
 
@@ -99,4 +111,38 @@ ul {
 
 .table-form__input--textarea {
   height: 180px;
+}
+
+/* Pagination */
+
+.pagination__list {
+  grid-area: pagination;
+  display: flex;
+  justify-self: center;
+  gap: 6px;
+}
+
+.pagination__btn {
+  font-size: 15px;
+  font-family: inherit;
+
+  width: 30px;
+  height: 30px;
+
+  background: transparent;
+  border: 1px solid var(--black);
+  color: inherit;
+  cursor: pointer;
+}
+
+.pagination__btn--active {
+  background-color: var(--grey);
+  font-weight: 700;
+}
+
+
+.pagination__btn:hover {
+  background-color: var(--black);
+  color: white;
+  transition: all 0.5s;
 }
