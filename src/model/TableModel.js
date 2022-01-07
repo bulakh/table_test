@@ -1,3 +1,5 @@
+import { COUNT_USERS_ON_PAGE } from "../const";
+import { divideUsers } from "../utils/divideUsers";
 import { sortUsers } from "../utils/sort";
 
 class TableModel {
@@ -6,6 +8,8 @@ class TableModel {
     this._user = null;
     this._countSymbols = null;
     this._pageNumber = 0;
+
+    this._usersOnPage = divideUsers(this._users.slice(), COUNT_USERS_ON_PAGE)[this._pageNumber];
   }
 
   setCountSymbols(containerAbout) {
@@ -27,7 +31,15 @@ class TableModel {
   }
 
   setPageNumber(number) {
-    this._pageNumber = number - 1;
+    this._pageNumber = number-1;
+
+    this._usersOnPage = divideUsers(this._users.slice(), COUNT_USERS_ON_PAGE)[this._pageNumber];
+  }
+
+  setSortedUsers(sort) {
+    const sortedDefaultPage = divideUsers(this._users.slice(), COUNT_USERS_ON_PAGE)[this._pageNumber];
+
+    this._usersOnPage = sortUsers(this._usersOnPage, sort, sortedDefaultPage);
   }
 
   changeUsers(userData) {
@@ -38,10 +50,16 @@ class TableModel {
       }
       return user;
     })
+
+    this._usersOnPage = divideUsers(this._users.slice(), COUNT_USERS_ON_PAGE)[this._pageNumber];
   }
 
   getUsers() {
     return this._users;
+  }
+
+  getUsersOnPage() {
+    return this._usersOnPage;
   }
 
   getUser() {
@@ -50,12 +68,6 @@ class TableModel {
 
   getCountSymbols() {
     return this._countSymbols;
-  }
-
-  getSortedUsers(sort) {
-    const sortedUsers = this._users.slice()
-
-    return sortUsers(sortedUsers, sort, this._users);
   }
 
   getPageNumber() {

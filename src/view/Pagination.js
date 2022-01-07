@@ -1,24 +1,27 @@
 import Abstract from "./Abstract";
 
-const createPaginationTemplate = (count) => {
+const createPaginationTemplate = (count, current) => {
   const pageButtons = [];
   for (let i = 1; i <= count; i++) {
-    pageButtons.push(`<li><input type='button' class='pagination__btn' value='${i}'></li>`);
+    pageButtons.push(
+      `<li><input type='button' class='pagination__btn ${i === current ? 'pagination__btn--active':''}' value='${i}'></li>`
+    );
   };
 
   return `<ul class='pagination__list'>${pageButtons.join('')}</ul>`;
 }
 
 export default class Pagination extends Abstract {
-  constructor(count) {
+  constructor(count,pageNumber) {
     super();
     this._count = count;
+    this._currentPage = pageNumber+1;
 
     this._changeCurrentPageNumber = this._changeCurrentPageNumber.bind(this);
   }
 
   getTemplate() {
-    return createPaginationTemplate(this._count);
+    return createPaginationTemplate(this._count, this._currentPage);
   }
 
   _changeCurrentPageNumber(e) {
