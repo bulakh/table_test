@@ -6,3 +6,5 @@ export const sortType = {
   EYE_COLOR: 'eyeColor',
 }
 
+export const COUNT_USERS_ON_PAGE = 10;
+

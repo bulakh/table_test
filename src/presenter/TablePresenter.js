@@ -1,3 +1,5 @@
+import { COUNT_USERS_ON_PAGE } from '../const';
+import { divideUsers } from '../utils/divideUsers';
 import { remove, render, RenderPosition } from '../utils/render';
 import Form from '../view/Form';
 import Sort from '../view/Sort';
@@ -15,13 +17,15 @@ class TablePresenter {
     this._tableSort = tableSort;
 
     this._model = model;
-    this._allUsers = this._model.getUsers();
-    this._userList = new UserList(this._allUsers, this._countSymbols);
+    this._users = this._model.getUsers();
+
+    this._userList = new UserList(this._users, this._countSymbols);
     this._sortComponent = new Sort();
     this._formComponent = null;
 
     this._user = null;
     this._countSymbols = null;
+    this._pageNumber = this._model.getPageNumber();
 
     this.setCountSymbols = this.setCountSymbols.bind(this);
 
@@ -32,26 +36,23 @@ class TablePresenter {
   }
 
   init() {
-    this._renderUsers();
+    this.renderUsers();
     this.setCountSymbols();
     this._renderSort();
   }
 
-  _renderUsers() {
+  renderUsers() {
     remove(this._userList);
 
-    this._userList = new UserList(this._allUsers, this._countSymbols);
+    this._pageNumber = this._model.getPageNumber();
+
+    const usersOnPage = divideUsers(this._users, COUNT_USERS_ON_PAGE)[this._pageNumber];
+
+    this._userList = new UserList(usersOnPage, this._countSymbols);
 
     render(this._elementTable, this._userList, RenderPosition.BEFOREEND);
 
     this._userList.setClickOpenFormHandler(this._renderForm);
-  }
-
-  setCountSymbols() {
-    const blockAbout = document.querySelector('.block-about');
-    this._model.setCountSymbols(blockAbout);
-    this._countSymbols = this._model.getCountSymbols();
-    this._renderUsers();
   }
 
   _renderSort() {
@@ -61,9 +62,9 @@ class TablePresenter {
   }
 
   _sortUsers(e) {
-    this._allUsers = this._model.getSortedUsers(e.target.value);
+    this._users = this._model.getSortedUsers(e.target.value);
 
-    this._renderUsers();
+    this.renderUsers();
   }
 
   _renderForm(e) {
@@ -85,13 +86,20 @@ class TablePresenter {
 
   _changeUser(userData) {
     this._model.changeUsers(userData);
-    this._allUsers = this._model.getUsers();
-    this._renderUsers();
+    this._users = this._model.getUsers();
+    this.renderUsers();
     this._removeForm();
   }
 
   _removeForm() {
     remove(this._formComponent);
+  }
+
+  setCountSymbols() {
+    const blockAbout = document.querySelector('.block-about');
+    this._model.setCountSymbols(blockAbout);
+    this._countSymbols = this._model.getCountSymbols();
+    this.renderUsers();
   }
 }
 

@@ -1,4 +1,3 @@
-// import { sortType } from "../const";
 import { sortUsers } from "../utils/sort";
 
 class TableModel {
@@ -6,10 +5,7 @@ class TableModel {
     this._users = [...initialUsers];
     this._user = null;
     this._countSymbols = null;
-  }
-
-  getUsers() {
-    return this._users;
+    this._pageNumber = 0;
   }
 
   setCountSymbols(containerAbout) {
@@ -30,6 +26,10 @@ class TableModel {
     this._user = this._users.find(user => user.id === e.currentTarget.dataset.id);
   }
 
+  setPageNumber(number) {
+    this._pageNumber = number - 1;
+  }
+
   changeUsers(userData) {
     this._user = {...this._user, ...userData};
     this._users = this._users.map(user => {
@@ -38,6 +38,10 @@ class TableModel {
       }
       return user;
     })
+  }
+
+  getUsers() {
+    return this._users;
   }
 
   getUser() {
@@ -54,9 +58,9 @@ class TableModel {
     return sortUsers(sortedUsers, sort, this._users);
   }
 
-  // clearUsers() {
-  //   return this._users = [];
-  // }
+  getPageNumber() {
+    return this._pageNumber;
+  }
 }
 
 export default TableModel;
