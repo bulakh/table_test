@@ -1,13 +1,24 @@
 import Abstract from "./Abstract";
 import User from "./User";
 
-const createUserListTemplate = (users, count) => {
+const createTableTemplate = (users, count) => {
 
   const tableRows = users.map(user => new User(user, count).getElement().innerHTML);
-  return `<tbody class="table-list">${tableRows}</tbody>`;
+
+  return `<table class="table">
+    <thead>
+      <tr>
+        <td>firstName</td>
+        <td>lastName</td>
+        <td>about</td>
+        <td>eyeColor</td>
+      </tr>
+    </thead>
+    <tbody class="table-list">${tableRows.join('')}</tbody>
+  </table>`
 }
 
-export default class UserList extends Abstract {
+export default class Table extends Abstract {
   constructor(users, count) {
     super();
     this._users = users;
@@ -17,7 +28,7 @@ export default class UserList extends Abstract {
   }
 
   getTemplate() {
-    return createUserListTemplate(this._users, this._count);
+    return createTableTemplate(this._users, this._count);
   }
 
   _showFormHandler(e) {

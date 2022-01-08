@@ -39,7 +39,7 @@ class NavigationPresenter {
   _sortUsers(e) {
     this._model.setSortedUsers(e.target.value);
 
-    this._tablePresenter.renderUsers();
+    this._tablePresenter.renderTable();
   }
 
   _renderPagination() {
@@ -59,7 +59,7 @@ class NavigationPresenter {
     this._model.setPageNumber(e.target.value);
     this._pageNumber = this._model.getPageNumber();
 
-    this._tablePresenter.renderUsers();
+    this._tablePresenter.renderTable();
     this._renderSort();
     this._renderPagination();
   }

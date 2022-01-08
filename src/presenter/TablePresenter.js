@@ -1,19 +1,17 @@
-import { COUNT_USERS_ON_PAGE } from '../const';
-import { divideUsers } from '../utils/divideUsers';
 import { remove, render, RenderPosition } from '../utils/render';
 import Form from '../view/Form';
-// import Sort from '../view/Sort';
-import UserList from '../view/UserList';
+import Table from '../view/Table';
 
 class TablePresenter {
-  constructor(tableContainer, tableWrapContainer, model) {
-    this._tableContainer = tableContainer;
+  constructor(tableWrapMainContainer, tableWrapContainer, model) {
+    // this._table = table;
+    this._tableWrapMainContainer = tableWrapMainContainer;
     this._tableWrapContainer = tableWrapContainer;
 
     this._model = model;
     this._users = this._model.getUsersOnPage();
 
-    this._userList = new UserList(this._users, this._countSymbols);
+    this._TableComponent = new Table(this._users, this._countSymbols);
     this._formComponent = null;
 
     this._user = null;
@@ -27,20 +25,20 @@ class TablePresenter {
   }
 
   init() {
-    this.renderUsers();
+    this.renderTable();
     this.setCountSymbols();
   }
 
-  renderUsers() {
-    remove(this._userList);
+  renderTable() {
+    remove(this._TableComponent);
 
     this._users = this._model.getUsersOnPage();
 
-    this._userList = new UserList(this._users, this._countSymbols);
+    this._TableComponent = new Table(this._users, this._countSymbols);
 
-    render(this._tableContainer, this._userList, RenderPosition.BEFOREEND);
+    render(this._tableWrapMainContainer, this._TableComponent, RenderPosition.BEFOREEND);
 
-    this._userList.setClickOpenFormHandler(this._renderForm);
+    this._TableComponent.setClickOpenFormHandler(this._renderForm);
   }
 
   _renderForm(e) {
@@ -62,7 +60,7 @@ class TablePresenter {
 
   _changeUser(userData) {
     this._model.changeUsers(userData);
-    this.renderUsers();
+    this.renderTable();
     this._removeForm();
   }
 
@@ -74,7 +72,7 @@ class TablePresenter {
     const blockAbout = document.querySelector('.block-about');
     this._model.setCountSymbols(blockAbout);
     this._countSymbols = this._model.getCountSymbols();
-    this.renderUsers();
+    this.renderTable();
   }
 }
 

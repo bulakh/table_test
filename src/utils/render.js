@@ -1,5 +1,6 @@
 import Abstract from "../view/Abstract";
 
+const TABLE_ALIASES = ['tr', 'tb', 'th'];
 
 export const RenderPosition = {
   AFTERBEGIN: 'afterbegin',
@@ -30,7 +31,7 @@ export const createElement = (template) => {
 
   newElement = document.createElement('div');
 
-  if (template.slice(1, 3) === 'tr' || template.slice(1, 3) === 'tb') {
+  if (TABLE_ALIASES.includes(template.slice(1, 3))) {
     newElement = document.createElement('table');
   }
 

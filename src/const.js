@@ -7,4 +7,5 @@ export const sortType = {
 }
 
 export const COUNT_USERS_ON_PAGE = 10;
+export const DEFAULT_COLUMNS = ['firstName', 'lastName', 'about', 'eyeColor'];
 
