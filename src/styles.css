@@ -3,6 +3,7 @@
 :root {
   --black: #00001a;
   --grey: #eaeafb;
+  --purple: #f5d3ff;
 }
 
 html {
@@ -63,6 +64,18 @@ ul {
   text-align: center;
 }
 
+.nav {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 15px;
+}
+
+.nav__list {
+  display: flex;
+  gap: 5px;
+}
+
 .table {
   grid-area: table;
   width: 100%;
@@ -73,6 +86,18 @@ ul {
   border-collapse: collapse;
   text-align: center;
 }
+
+.table__header {
+  background: var(--purple);
+  padding: 10px;
+}
+
+.table__header:hover {
+  outline: 2px solid var(--black);
+  cursor: pointer;
+}
+
+
 
 .table__row:hover {
   cursor: pointer;
@@ -91,7 +116,7 @@ ul {
 
 .table-form {
   grid-area: form;
-  margin-top: 98px;
+  margin-top: 113px;
   padding: 30px;
 
   border: 1px solid var(--black);

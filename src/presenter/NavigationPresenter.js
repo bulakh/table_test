@@ -6,32 +6,38 @@ import Sort from '../view/Sort';
 
 
 class NavigationPresenter {
-  constructor(tableWrapContainer, tableSortContainer, model, tablePresenter) {
-    this._tableSortContainer = tableSortContainer;
+  constructor(tableWrapContainer, tableWrapMainContainer, tableNavContainer, model) {
     this._tableWrapContainer = tableWrapContainer;
-
+    this._tableWrapMainContainer = tableWrapMainContainer;
+    this._tableNavContainer = tableNavContainer;
     this._model = model;
-    this._tablePresenter = tablePresenter;
 
     this._users = this._model.getUsers();
+    this._tableHeaders = this._model.getTableHeaders();
     this._pageNumber = 0;
 
-    this._sortComponent = new Sort();
+    this._sortComponent = new Sort(this._tableHeaders);
     this._paginationComponent = new Pagination(getPageCount(this._users, COUNT_USERS_ON_PAGE), this._pageNumber);
 
     this._changePageNumber = this._changePageNumber.bind(this);
     this._sortUsers = this._sortUsers.bind(this);
+
+    this._tablePresenter;
   }
 
-  init() {
-    this._renderSort();
+  init(tablePresenter) {
+    this.renderSort();
     this._renderPagination();
+
+    this._tablePresenter = tablePresenter;
   }
 
-  _renderSort() {
+  renderSort() {
     remove(this._sortComponent);
 
-    render(this._tableSortContainer, this._sortComponent, RenderPosition.BEFOREEND);
+    this._sortComponent = new Sort(this._tableHeaders);
+
+    render(this._tableNavContainer, this._sortComponent, RenderPosition.AFTERBEGIN);
 
     this._sortComponent.setChangeSortHandler(this._sortUsers);
   }
@@ -60,7 +66,7 @@ class NavigationPresenter {
     this._pageNumber = this._model.getPageNumber();
 
     this._tablePresenter.renderTable();
-    this._renderSort();
+    this.renderSort();
     this._renderPagination();
   }
 

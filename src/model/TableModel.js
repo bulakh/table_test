@@ -6,27 +6,28 @@ class TableModel {
   constructor (initialUsers = [], tableHeaders = []) {
     this._users = [...initialUsers];
     this._tableHeaders = [...tableHeaders];
+    this._removedHeaders = [];
 
     this._user = null;
-    this._countSymbols = null;
+    // this._countSymbols = null;
     this._pageNumber = 0;
 
     this._usersOnPage = divideUsers(this._users.slice(), COUNT_USERS_ON_PAGE)[this._pageNumber];
   }
 
-  setCountSymbols(containerAbout) {
-    const width = window.innerWidth * 28.87/100;
-    const fontSize = window.getComputedStyle(containerAbout).fontSize;
-    this._countSymbols = Math.round((width * 1.7 / parseInt(fontSize, 10)) * 2);
+  // setCountSymbols(containerAbout) {
+  //   const width = window.innerWidth * 28.87/100;
+  //   const fontSize = window.getComputedStyle(containerAbout).fontSize;
+  //   this._countSymbols = Math.round((width * 1.7 / parseInt(fontSize, 10)) * 2);
 
-    if (window.innerWidth < 1227) {
-      this._countSymbols -= 10;
-    }
+  //   if (window.innerWidth < 1227) {
+  //     this._countSymbols -= 10;
+  //   }
 
-    if (window.innerWidth < 1075) {
-      this._countSymbols -= 15;
-    }
-  }
+  //   if (window.innerWidth < 1075) {
+  //     this._countSymbols -= 15;
+  //   }
+  // }
 
   setUser(e) {
     this._user = this._users.find(user => user.id === e.currentTarget.dataset.id);
@@ -42,6 +43,21 @@ class TableModel {
     const sortedDefaultPage = divideUsers(this._users.slice(), COUNT_USERS_ON_PAGE)[this._pageNumber];
 
     this._usersOnPage = sortUsers(this._usersOnPage, sort, sortedDefaultPage);
+  }
+
+  setTableHeaders(header) {
+    const currentIndexHeader = this._tableHeaders.indexOf(header);
+    const indexRemovedHeader = this._removedHeaders.indexOf(header);
+
+    if (currentIndexHeader > indexRemovedHeader && this._tableHeaders.length !== 1) {
+      this._tableHeaders.splice(currentIndexHeader, 1);
+      this._removedHeaders.push(header);
+    }
+
+    if (currentIndexHeader < indexRemovedHeader) {
+      this._tableHeaders.push(header);
+      this._removedHeaders.splice(indexRemovedHeader, 1);
+    }
   }
 
   changeUsers(userData) {
@@ -68,9 +84,9 @@ class TableModel {
     return this._user;
   }
 
-  getCountSymbols() {
-    return this._countSymbols;
-  }
+  // getCountSymbols() {
+  //   return this._countSymbols;
+  // }
 
   getPageNumber() {
     return this._pageNumber;
@@ -78,6 +94,10 @@ class TableModel {
 
   getTableHeaders() {
     return this._tableHeaders;
+  }
+
+  getRemovedHeaders() {
+    return this._removedHeaders;
   }
 }
 

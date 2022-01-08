@@ -44,10 +44,12 @@ export default class Form extends Abstract {
     };
 
     currentUserProps.map(prop => {
-      if (/name/i.test(prop[0])) {
-        chagedUser.name[prop[0]] = prop[1];
+      const [name, value] = prop;
+
+      if (/name/i.test(name)) {
+        chagedUser.name[name] = value;
       } else {
-        chagedUser[prop[0]] = prop[1];
+        chagedUser[name] = value;
       }
     });
 

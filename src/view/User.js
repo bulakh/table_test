@@ -11,7 +11,7 @@ const createUserTemplate = (user, count, headers) => {
   </tr>`
 }
 
-// style='color: ${eyeColor}; background:${eyeColor}'
+// style='${header === 'eyeColor' ? `color: ${user.eyeColor}; background:${user.eyeColor}` : ''}'
 
 export default class User extends Abstract {
   constructor(user, count, headers) {
