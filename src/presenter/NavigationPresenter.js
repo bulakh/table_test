@@ -6,8 +6,8 @@ import Sort from '../view/Sort';
 
 
 class NavigationPresenter {
-  constructor(tableWrapContainer, tableSort, model, tablePresenter) {
-    this._tableSort = tableSort;
+  constructor(tableWrapContainer, tableSortContainer, model, tablePresenter) {
+    this._tableSortContainer = tableSortContainer;
     this._tableWrapContainer = tableWrapContainer;
 
     this._model = model;
@@ -31,7 +31,7 @@ class NavigationPresenter {
   _renderSort() {
     remove(this._sortComponent);
 
-    render(this._tableSort, this._sortComponent, RenderPosition.BEFOREEND);
+    render(this._tableSortContainer, this._sortComponent, RenderPosition.BEFOREEND);
 
     this._sortComponent.setChangeSortHandler(this._sortUsers);
   }

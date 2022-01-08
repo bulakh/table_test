@@ -79,6 +79,10 @@ ul {
   background-color: var(--grey);
 }
 
+.block-about {
+  height: 180px;
+}
+
 .select-wrap {
   display: inline-block;
 }

@@ -1,17 +1,14 @@
 import Abstract from "./Abstract";
 import User from "./User";
 
-const createTableTemplate = (users, count) => {
-
-  const tableRows = users.map(user => new User(user, count).getElement().innerHTML);
+const createTableTemplate = (users, count, headers) => {
+  const tableRows = users.map(user => new User(user, count, headers).getElement().innerHTML);
+  const tableHeaders = headers.map(header => `<td>${header}</td>`);
 
   return `<table class="table">
     <thead>
       <tr>
-        <td>firstName</td>
-        <td>lastName</td>
-        <td>about</td>
-        <td>eyeColor</td>
+        ${tableHeaders.join('')}
       </tr>
     </thead>
     <tbody class="table-list">${tableRows.join('')}</tbody>
@@ -19,16 +16,17 @@ const createTableTemplate = (users, count) => {
 }
 
 export default class Table extends Abstract {
-  constructor(users, count) {
+  constructor(users, count, headers) {
     super();
     this._users = users;
     this._count = count;
+    this._headers = headers;
 
     this._showFormHandler = this._showFormHandler.bind(this);
   }
 
   getTemplate() {
-    return createTableTemplate(this._users, this._count);
+    return createTableTemplate(this._users, this._count, this._headers);
   }
 
   _showFormHandler(e) {

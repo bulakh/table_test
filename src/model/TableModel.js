@@ -3,9 +3,9 @@ import { divideUsers } from "../utils/divideUsers";
 import { sortUsers } from "../utils/sort";
 
 class TableModel {
-  constructor (initialUsers = [], columns = []) {
+  constructor (initialUsers = [], tableHeaders = []) {
     this._users = [...initialUsers];
-    this._colomns = [...columns];
+    this._tableHeaders = [...tableHeaders];
 
     this._user = null;
     this._countSymbols = null;
@@ -76,8 +76,8 @@ class TableModel {
     return this._pageNumber;
   }
 
-  getColumns() {
-    return this._colomns;
+  getTableHeaders() {
+    return this._tableHeaders;
   }
 }
 

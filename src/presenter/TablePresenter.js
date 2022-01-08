@@ -4,20 +4,20 @@ import Table from '../view/Table';
 
 class TablePresenter {
   constructor(tableWrapMainContainer, tableWrapContainer, model) {
-    // this._table = table;
     this._tableWrapMainContainer = tableWrapMainContainer;
     this._tableWrapContainer = tableWrapContainer;
 
     this._model = model;
     this._users = this._model.getUsersOnPage();
+    this._tableHeaders = this._model.getTableHeaders();
 
-    this._TableComponent = new Table(this._users, this._countSymbols);
+    this._TableComponent = new Table(this._users, this._countSymbols, this._tableHeaders);
     this._formComponent = null;
 
     this._user = null;
-    this._countSymbols = null;
+    // this._countSymbols = null;
 
-    this.setCountSymbols = this.setCountSymbols.bind(this);
+    // this.setCountSymbols = this.setCountSymbols.bind(this);
 
     this._renderForm = this._renderForm.bind(this);
     this._removeForm = this._removeForm.bind(this);
@@ -26,7 +26,7 @@ class TablePresenter {
 
   init() {
     this.renderTable();
-    this.setCountSymbols();
+    // this.setCountSymbols();
   }
 
   renderTable() {
@@ -34,7 +34,7 @@ class TablePresenter {
 
     this._users = this._model.getUsersOnPage();
 
-    this._TableComponent = new Table(this._users, this._countSymbols);
+    this._TableComponent = new Table(this._users, this._countSymbols, this._tableHeaders);
 
     render(this._tableWrapMainContainer, this._TableComponent, RenderPosition.BEFOREEND);
 
@@ -49,7 +49,7 @@ class TablePresenter {
     this._model.setUser(e);
     this._user = this._model.getUser();
 
-    this._formComponent = new Form(this._user);
+    this._formComponent = new Form(this._user, this._tableHeaders);
 
     render(this._tableWrapContainer, this._formComponent, RenderPosition.BEFOREEND);
 
@@ -68,12 +68,12 @@ class TablePresenter {
     remove(this._formComponent);
   }
 
-  setCountSymbols() {
-    const blockAbout = document.querySelector('.block-about');
-    this._model.setCountSymbols(blockAbout);
-    this._countSymbols = this._model.getCountSymbols();
-    this.renderTable();
-  }
+  // setCountSymbols() {
+  //   const blockAbout = document.querySelector('.block-about');
+  //   this._model.setCountSymbols(blockAbout);
+  //   this._countSymbols = this._model.getCountSymbols();
+  //   this.renderTable();
+  // }
 }
 
 export default TablePresenter;
