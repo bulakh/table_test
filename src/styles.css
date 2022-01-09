@@ -9,13 +9,15 @@
 
 html {
   height: 100%;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
 }
 
 body {
@@ -54,6 +56,8 @@ button {
 
 button:hover {
   cursor: pointer;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
   transition: all 0.5s;
 }
 
@@ -72,10 +76,13 @@ button:hover {
 }
 
 .table-wrap {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 50% 2.5% 40%;
   grid-template-columns: 50% 40%;
+  -ms-grid-rows: 1fr 1% 1fr;
   grid-template-rows: 1fr 1fr;
-  grid-template-areas:
+      grid-template-areas:
       "table form"
       "pagination .";
   gap: 1% 2.5%;
@@ -88,13 +95,21 @@ button:hover {
 /* Navigation header */
 
 .nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   margin-bottom: 15px;
 }
 
 .nav__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 5px;
 }
@@ -117,6 +132,8 @@ button:hover {
 /* Table */
 
 .table {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
   grid-area: table;
   width: 100%;
 }
@@ -145,6 +162,8 @@ button:hover {
 /* Form */
 
 .table-form {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
   position: relative;
 
   grid-area: form;
@@ -156,18 +175,24 @@ button:hover {
 }
 
 .table-form__item {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 0.25fr 10px 1fr;
   grid-template-columns: 0.25fr 1fr;
   gap: 10px;
   margin-bottom: 20px;
 }
 
 .table-form__label {
-  flex-grow: 0.1;
+  -webkit-box-flex: 0.1;
+      -ms-flex-positive: 0.1;
+          flex-grow: 0.1;
 }
 
 .table-form__input {
-  flex-grow: 1;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
 
   font-family: inherit;
   font-size: 15px;
@@ -178,8 +203,12 @@ button:hover {
 }
 
 .table-form__buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: flex-end;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   gap: 10px;
 }
 
@@ -204,9 +233,14 @@ button:hover {
 /* Pagination */
 
 .pagination__list {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
   grid-area: pagination;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-self: center;
+  -ms-grid-column-align: center;
+      justify-self: center;
   gap: 6px;
 }
 
@@ -232,7 +266,8 @@ button:hover {
 .pagination__btn:hover {
   background-color: var(--black);
   color: var(--white);
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
   transition: all 0.5s;
 }
-
 
