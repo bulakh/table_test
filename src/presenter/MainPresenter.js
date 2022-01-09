@@ -10,11 +10,17 @@ class MainPresenter {
 
     this._tablePresenter = new TablePresenter(this._tableWrapContainer, this._tableWrapMainContainer, this._tableNavContainer, this._model);
     this._navigationPresenter = new NavigationPresenter(this._tableWrapContainer, this._tableWrapMainContainer, this._tableNavContainer, this._model);
+
+    this.setCountSymbols = this.setCountSymbols.bind(this);
   }
 
   init() {
     this._tablePresenter.init(this._navigationPresenter);
     this._navigationPresenter.init(this._tablePresenter);
+  }
+
+  setCountSymbols() {
+    this._tablePresenter.setCountSymbols();
   }
 }
 

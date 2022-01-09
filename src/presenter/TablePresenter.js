@@ -19,21 +19,23 @@ class TablePresenter {
     this._formComponent = null;
 
     this._user = null;
-    // this._countSymbols = null;
+    this._countSymbols = null;
 
-    // this.setCountSymbols = this.setCountSymbols.bind(this);
+    this.setCountSymbols = this.setCountSymbols.bind(this);
 
     this._renderForm = this._renderForm.bind(this);
     this._removeForm = this._removeForm.bind(this);
     this._changeUser = this._changeUser.bind(this);
     this._removeAddColumn = this._removeAddColumn.bind(this);
 
+    this._blockAbout = null;
     this._navigationPresenter;
   }
 
   init(NavPresenter) {
     this._renderButtonsAdd();
     this.renderTable();
+    this.setCountSymbols();
 
     this._navigationPresenter = NavPresenter;
   }
@@ -42,17 +44,14 @@ class TablePresenter {
     remove(this._tableComponent);
 
     this._users = this._model.getUsersOnPage();
-
     this._tableComponent = new Table(this._users, this._countSymbols, this._tableHeaders);
 
     render(this._tableWrapMainContainer, this._tableComponent, RenderPosition.BEFOREEND);
 
-    this._tableComponent.setClickOpenFormHandler(this._renderForm);
-    this._tableComponent.setClickRemoveColumnHandler(this._removeAddColumn);
-
     this._removeForm();
 
-    this._model.add
+    this._tableComponent.setClickOpenFormHandler(this._renderForm);
+    this._tableComponent.setClickRemoveColumnHandler(this._removeAddColumn);
   }
 
   _renderForm(e) {
@@ -84,6 +83,7 @@ class TablePresenter {
   _changeUser(userData) {
     this._model.changeUsers(userData);
     this.renderTable();
+    this.setCountSymbols();
     this._removeForm();
   }
 
@@ -95,19 +95,22 @@ class TablePresenter {
 
   _removeAddColumn(header) {
     this._model.setTableHeaders(header);
+
     this._tableHeaders = this._model.getTableHeaders();
 
     this._renderButtonsAdd();
     this.renderTable();
+    this.setCountSymbols();
     this._navigationPresenter.renderSort();
+
   }
 
-  // setCountSymbols() {
-  //   const blockAbout = document.querySelector('.block-about');
-  //   this._model.setCountSymbols(blockAbout);
-  //   this._countSymbols = this._model.getCountSymbols();
-  //   this.renderTable();
-  // }
+  setCountSymbols() {
+    this._model.setCountSymbols();
+    this._countSymbols = this._model.getCountSymbols();
+
+    this.renderTable();
+  }
 }
 
 export default TablePresenter;

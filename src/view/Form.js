@@ -5,7 +5,7 @@ const createFormTemplate = (user, headers) => {
     return `<li class="table-form__item">
       <label class="table-form__label" for="${header}">${header[0].toUpperCase() + header.slice(1)}</label>
       ${header === 'about'
-        ? `<textarea class="table-form__input block-about" type="text" name="about" id="about">${user.about}</textarea>`
+        ? `<textarea class="table-form__input table-form__input--textarea" type="text" name="about" id="about">${user.about}</textarea>`
         : `<input class="table-form__input" type="text" name="${header}" id="${header}" value="${user[header] || user.name[header]}">`
       }
     </li>`

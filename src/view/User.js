@@ -1,17 +1,18 @@
 import Abstract from "./Abstract";
 
 const createUserTemplate = (user, count, headers) => {
-  // const {id, name, about, eyeColor} = user;
-  // const {firstName, lastName} = name;
+  const tableData = headers.map(header => {
+    if (header === 'about') {
+      return `<td class='block-about' data-name='about'>${user.about.slice(0, count)}...</td>`
+    }
 
-  const tableData = headers.map(header => `<td data-name='${header}'>${user[header] || user.name[header]}</td>`);
+    return `<td style='${header === 'eyeColor' ? `color: ${user.eyeColor}; background:${user.eyeColor}` : ''}' data-name='${header}'>${user[header] || user.name[header]}</td>`
+  });
 
   return `<tr class="table__row" data-id="${user.id}">
     ${tableData.join('')}
   </tr>`
 }
-
-// style='${header === 'eyeColor' ? `color: ${user.eyeColor}; background:${user.eyeColor}` : ''}'
 
 export default class User extends Abstract {
   constructor(user, count, headers) {

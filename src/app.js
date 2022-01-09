@@ -7,12 +7,12 @@ import MainPresenter from './presenter/MainPresenter';
 const tableWrap = document.querySelector('.table-wrap');
 const tableWrapMain = document.querySelector('.table-wrap__main');
 const tableNav = document.querySelector('.nav');
-// const tableSort = document.querySelector('.select-wrap');
 
 const tableModel = new TableModel(users, TABLE_HEADERS);
 const mainPresenter = new MainPresenter(tableWrap, tableWrapMain, tableNav, tableModel);
 
-mainPresenter.init();
+mainPresenter.init()
 
+window.onresize = mainPresenter.setCountSymbols;
 
 
