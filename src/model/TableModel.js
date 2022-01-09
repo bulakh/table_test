@@ -3,6 +3,10 @@ import { calcCountSymbols } from "../utils/countSymbols";
 import { divideUsers } from "../utils/divideUsers";
 import { sortUsers } from "../utils/sort";
 
+// Создаем model, здесь храним данные. set - записываем, get - получаем.
+// На вход принимаем users и заголовки таблицы по умолчанию.
+// Копируем оригинальные данные избегая муцтаций.
+
 class TableModel {
   constructor (initialUsers = [], tableHeaders = []) {
     this._users = [...initialUsers];
@@ -13,6 +17,7 @@ class TableModel {
     this._countSymbols = null;
     this._pageNumber = 0;
 
+    //Кол-во юзеров на странице. Поделим всех юзеров на массивы и будем отображать массив необходимой страницы.
     this._usersOnPage = divideUsers(this._users.slice(), COUNT_USERS_ON_PAGE)[this._pageNumber];
   }
 
@@ -36,6 +41,7 @@ class TableModel {
     this._usersOnPage = sortUsers(this._usersOnPage, sort, sortedDefaultPage);
   }
 
+  // Используем два массива с заголовками, один выводится в таблице, другой в кнопках на добавление колонок.
   setTableHeaders(header) {
     const currentIndexHeader = this._tableHeaders.indexOf(header);
     const indexRemovedHeader = this._removedHeaders.indexOf(header);
@@ -51,6 +57,7 @@ class TableModel {
     }
   }
 
+  // Изменяем данные по id юзера.
   changeUsers(userData) {
     this._user = {...this._user, ...userData};
     this._users = this._users.map(user => {

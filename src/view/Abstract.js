@@ -1,5 +1,7 @@
 import { createElement } from '../utils/render';
 
+//Абстрактный класс, от него наследуются все компоненты отображения.
+
 export default class Abstract {
   constructor() {
     if (new.target === Abstract) {
@@ -8,6 +10,8 @@ export default class Abstract {
     this._element = null;
     this._callback = {};
   }
+
+  //Методы которые используются во всех view.
 
   getTemplate() {
     throw new Error('Abstract method not implemented: getTemplate');

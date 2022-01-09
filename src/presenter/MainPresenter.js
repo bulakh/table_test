@@ -1,6 +1,11 @@
 import NavigationPresenter from './NavigationPresenter';
 import TablePresenter from "./TablePresenter";
 
+// Презентер отвечает за логику взаимодействия данных и компонентов отображения(view).
+
+//Главный презентер. Соединяем всех презентеров.
+//На вход принимаем, элементы.
+
 class MainPresenter {
   constructor(tableWrapContainer, tableWrapMainContainer, tableNavContainer, model) {
     this._tableWrapContainer = tableWrapContainer;
@@ -14,11 +19,14 @@ class MainPresenter {
     this.setCountSymbols = this.setCountSymbols.bind(this);
   }
 
+  // Инициализируем презентеры.
+  // Аргументами передаем, друг другу презентеры.
   init() {
     this._tablePresenter.init(this._navigationPresenter);
     this._navigationPresenter.init(this._tablePresenter);
   }
 
+  // Прокидываем этот метод, чтобы запустить в app на resize.
   setCountSymbols() {
     this._tablePresenter.setCountSymbols();
   }

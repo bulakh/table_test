@@ -1,8 +1,10 @@
 import Abstract from "./Abstract";
 
+//Компонент отрисовки сортировки
+//Все как и в других компонентах.
+
 const createSortTemplate = (headers) => {
   const options = headers.map(header => `<option value="${header}">${header}</option>`)
-
 
   return `<div class="select-wrap">
   Sort by

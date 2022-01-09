@@ -1,6 +1,13 @@
 import Abstract from "./Abstract";
 
+//Компонент формы
+//Используем данные юзера и массив хедеров таблицы, чтобы не рисовать лишние поля в форме.
+
 const createFormTemplate = (user, headers) => {
+
+  //Блок about отличается, создаем отдельное условие.
+  //Лэйбл делаем с заглавной буквы.
+  //firstName и lastName в отдельном объекте name, ставим логическое ИЛИ.
   const formItems = headers.map(header => {
     return `<li class="table-form__item">
       <label class="table-form__label" for="${header}">${header[0].toUpperCase() + header.slice(1)}</label>
@@ -29,6 +36,7 @@ export default class Form extends Abstract {
     this._user = user;
     this._headers = headers;
 
+    //Связываем внутренние методы класса.
     this._changeUserDataHandler = this._changeUserDataHandler.bind(this);
     this._closeClickFormHandler = this._closeClickFormHandler.bind(this);
     this._escKeyDownHandler = this._escKeyDownHandler.bind(this);
@@ -38,6 +46,7 @@ export default class Form extends Abstract {
     return createFormTemplate(this._user, this._headers);
   }
 
+  //Берем данные из инпута введеного пользователем и меняем.
   _getUserData() {
     const currentUserProps = Array.from(this.getElement().querySelectorAll('.table-form__input')).map(input => [input.name, input.value]);
 
@@ -79,11 +88,13 @@ export default class Form extends Abstract {
     this._removeEvents();
   }
 
+  //Удаляем событие, чтобы не копились.
   _removeEvents() {
     document.removeEventListener('keydown', this._escKeyDownHandler);
     Array.from(this.getElement().querySelectorAll('.button-close')).map(btn => btn.removeEventListener('click', this._closeClickFormHandler));
   }
 
+  //Вешаем события:
   setClickCancelHandler(callback) {
     this._callback.closeForm = callback;
     Array.from(this.getElement().querySelectorAll('.button-close')).map(btn => btn.addEventListener('click', this._closeClickFormHandler));

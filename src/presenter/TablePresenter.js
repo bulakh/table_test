@@ -3,6 +3,8 @@ import ButtonsAddView from '../view/ButtonsAdd';
 import Form from '../view/Form';
 import Table from '../view/Table';
 
+//Презентер Таблица отвечает за логику отрисовки компонентов Таблицы, Формы и Кнопок добавления колон.
+
 class TablePresenter {
   constructor(tableWrapContainer, tableWrapMainContainer, tableNavContainer, model) {
     this._tableWrapContainer = tableWrapContainer;
@@ -10,17 +12,19 @@ class TablePresenter {
     this._tableNavContainer = tableNavContainer;
     this._model = model;
 
+    //Из модели берем данные.
     this._users = this._model.getUsersOnPage();
     this._tableHeaders = this._model.getTableHeaders();
     this._removedHeaders = this._model.getRemovedHeaders();
 
+    //Объявлем компоненты отображения (view).
     this._buttonsAddComponent = new ButtonsAddView(this._removedHeaders);
     this._tableComponent = new Table(this._users, this._countSymbols, this._tableHeaders);
     this._formComponent = null;
 
-    this._user = null;
     this._countSymbols = null;
 
+    //Связываем методы, чтобы this не было потери контекста.
     this.setCountSymbols = this.setCountSymbols.bind(this);
 
     this._renderForm = this._renderForm.bind(this);
@@ -28,10 +32,11 @@ class TablePresenter {
     this._changeUser = this._changeUser.bind(this);
     this._removeAddColumn = this._removeAddColumn.bind(this);
 
-    this._blockAbout = null;
     this._navigationPresenter;
   }
 
+  //Методы в момент инициализации презентера
+  //Параметр другой презентер из которого нам нужны методы.
   init(NavPresenter) {
     this._renderButtonsAdd();
     this.renderTable();
@@ -40,6 +45,7 @@ class TablePresenter {
     this._navigationPresenter = NavPresenter;
   }
 
+  //Метод отрисовки таблицы с данными юзера.
   renderTable() {
     remove(this._tableComponent);
 
@@ -59,9 +65,10 @@ class TablePresenter {
 
 
     this._model.setUser(e);
-    this._user = this._model.getUser();
 
-    this._formComponent = new Form(this._user, this._tableHeaders);
+    const user = this._model.getUser();
+
+    this._formComponent = new Form(user, this._tableHeaders);
 
     render(this._tableWrapContainer, this._formComponent, RenderPosition.BEFOREEND);
 
@@ -80,6 +87,7 @@ class TablePresenter {
     this._buttonsAddComponent.setClickAddColumnHandler(this._removeAddColumn);
   }
 
+  //Метод изменения данных в моделе
   _changeUser(userData) {
     this._model.changeUsers(userData);
     this.renderTable();
@@ -94,6 +102,7 @@ class TablePresenter {
     }
   }
 
+  //Метод удаления и добавления колонок
   _removeAddColumn(header) {
     this._model.setTableHeaders(header);
 
@@ -106,6 +115,7 @@ class TablePresenter {
 
   }
 
+  //Метод изменяет кол-во символов, которое отрисуется в блоке about.
   setCountSymbols() {
     this._model.setCountSymbols();
     this._countSymbols = this._model.getCountSymbols();

@@ -1,9 +1,13 @@
 import Abstract from "./Abstract";
 import User from "./User";
 
+//Компонент отображения таблицы.
+//Тут подключаем компонент отдельного юзера.
+//Принимает всех юзеров, кол-во символов в блоке About (чтобы было 2 строки) и заголовки.
+
 const createTableTemplate = (users, count, headers) => {
-  const tableRows = users.map(user => new User(user, count, headers).getElement().innerHTML);
   const tableHeaders = headers.map(header => `<td class='table__header' title='Remove column'>${header}</td>`);
+  const tableRows = users.map(user => new User(user, count, headers).getElement().innerHTML);
 
   return `<table class="table">
     <thead>
@@ -16,10 +20,10 @@ const createTableTemplate = (users, count, headers) => {
 }
 
 export default class Table extends Abstract {
-  constructor(users, count, headers) {
+  constructor(users, countSymbolsAbout, headers) {
     super();
     this._users = users;
-    this._count = count;
+    this._count = countSymbolsAbout;
     this._headers = headers;
 
     this._showFormHandler = this._showFormHandler.bind(this);
@@ -35,6 +39,7 @@ export default class Table extends Abstract {
     this._callback.openForm(e);
   }
 
+  //Метод по клику на заголовок удаляет колонку.
   _removeColumnHandler(e) {
     e.preventDefault();
     this._callback.removeColumn(e.target.innerText);
