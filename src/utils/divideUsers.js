@@ -1,7 +1,11 @@
+//Тут располагаем вспомогательные функции.
+//Получения нужной страницы.
+
 export const getPageCount = (users, usersOnPage) => {
   return Math.ceil(users.length/usersOnPage)
 }
 
+//Разделения массива юзеров на массив массивов равный кол-ву страниц.
 
 export const divideUsers = (users, usersOnPage) => {
   users = users.slice();

@@ -1,6 +1,8 @@
 import { sortType } from "../const";
 
 
+//Сортировка юзеров
+
 export const sortUsers = (sortedUsers, sort, defaultUsers) => {
 
   switch (sort) {

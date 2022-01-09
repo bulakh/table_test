@@ -1,5 +1,8 @@
 import Abstract from "./Abstract";
 
+//Компонент отрисовки навигации страницы.
+//На вход кол-во страниц и текущая.
+
 const createPaginationTemplate = (count, current) => {
   const pageButtons = [];
   for (let i = 1; i <= count; i++) {
@@ -17,6 +20,7 @@ export default class Pagination extends Abstract {
     this._count = count;
     this._currentPage = pageNumber+1;
 
+    //Связывание.
     this._changeCurrentPageNumber = this._changeCurrentPageNumber.bind(this);
   }
 
@@ -24,6 +28,7 @@ export default class Pagination extends Abstract {
     return createPaginationTemplate(this._count, this._currentPage);
   }
 
+  //Меняем текущую страницу
   _changeCurrentPageNumber(e) {
     e.preventDefault();
     this._callback.changePage(e);

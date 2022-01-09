@@ -1,22 +1,31 @@
 import './styles.css';
 import { users } from './mocks';
 import TableModel from './model/TableModel';
-import TablePresenter from './presenter/TablePresenter';
-import NavigationPresenter from './presenter/NavigationPresenter';
+import MainPresenter from './presenter/MainPresenter';
+import { getObjFromJson } from './utils/others';
+import { TABLE_HEADERS } from './const';
 
-const table = document.querySelector('.table');
+//Основной файл, в который будем собирать другие.
+//Данные мы подключаем из файла с моками, по условию их не нужно загружать.
+
+//Контейнеры, в которые будем рендерить компоненты.
 const tableWrap = document.querySelector('.table-wrap');
-const tableSort = document.querySelector('.select-wrap');
-// const tableBody = document.querySelector('body');
+const tableWrapMain = document.querySelector('.table-wrap__main');
+const tableNav = document.querySelector('.nav');
 
-const tableModel = new TableModel(users);
+//Парсим json в объект.
+const allUsers = getObjFromJson(users);
 
-const tablePresenter = new TablePresenter(table, tableWrap, tableModel);
-tablePresenter.init();
+//Модель с данными
+const tableModel = new TableModel(allUsers, TABLE_HEADERS);
 
-const navigationPresenter = new NavigationPresenter(tableWrap, tableSort, tableModel, tablePresenter);
-navigationPresenter.init();
+//Презанетер отвечает за логику связи данных и отображения.
+const mainPresenter = new MainPresenter(tableWrap, tableWrapMain, tableNav, tableModel);
 
-window.onresize = tablePresenter.setCountSymbols;
+//Инициализация
+mainPresenter.init()
+
+//Используем метод на изменение размера экрана, чтобы отображать две строки в колонке about
+window.onresize = mainPresenter.setCountSymbols;
 
 

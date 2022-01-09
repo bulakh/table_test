@@ -1,25 +1,30 @@
 import Abstract from "./Abstract";
 
-const createSortTemplate = () => {
+//Компонент отрисовки сортировки
+//Все как и в других компонентах.
 
-  return `<select name="sort" class="sort">
+const createSortTemplate = (headers) => {
+  const options = headers.map(header => `<option value="${header}">${header}</option>`)
+
+  return `<div class="select-wrap">
+  Sort by
+  <select name="sort" class="sort">
     <option value="default">default</option>
-    <option value="firstName">firstName</option>
-    <option value="lastName">lastName</option>
-    <option value="about">about</option>
-    <option value="eyeColor">eyeColor</option>
-  </select>`
+    ${options.join('')}
+  </select>
+  </div>`
 }
 
 export default class Sort extends Abstract {
-  constructor() {
+  constructor(headers) {
     super();
+    this._headers = headers;
 
     this._changeSortHandler = this._changeSortHandler.bind(this);
   }
 
   getTemplate() {
-    return createSortTemplate();
+    return createSortTemplate(this._headers);
   }
 
   _changeSortHandler(e) {

@@ -1,29 +1,28 @@
 import { COUNT_USERS_ON_PAGE } from "../const";
+import { calcCountSymbols } from "../utils/countSymbols";
 import { divideUsers } from "../utils/divideUsers";
 import { sortUsers } from "../utils/sort";
 
+// Создаем model, здесь храним данные. set - записываем, get - получаем.
+// На вход принимаем users и заголовки таблицы по умолчанию.
+// Копируем оригинальные данные избегая муцтаций.
+
 class TableModel {
-  constructor (initialUsers = []) {
+  constructor (initialUsers = [], tableHeaders = []) {
     this._users = [...initialUsers];
+    this._tableHeaders = [...tableHeaders];
+    this._removedHeaders = [];
+
     this._user = null;
     this._countSymbols = null;
     this._pageNumber = 0;
 
+    //Кол-во юзеров на странице. Поделим всех юзеров на массивы и будем отображать массив необходимой страницы.
     this._usersOnPage = divideUsers(this._users.slice(), COUNT_USERS_ON_PAGE)[this._pageNumber];
   }
 
-  setCountSymbols(containerAbout) {
-    const width = window.innerWidth * 28.87/100;
-    const fontSize = window.getComputedStyle(containerAbout).fontSize;
-    this._countSymbols = Math.round((width * 1.7 / parseInt(fontSize, 10)) * 2);
-
-    if (window.innerWidth < 1227) {
-      this._countSymbols -= 10;
-    }
-
-    if (window.innerWidth < 1075) {
-      this._countSymbols -= 15;
-    }
+  setCountSymbols() {
+    this._countSymbols = calcCountSymbols(this._countSymbols);
   }
 
   setUser(e) {
@@ -42,6 +41,23 @@ class TableModel {
     this._usersOnPage = sortUsers(this._usersOnPage, sort, sortedDefaultPage);
   }
 
+  // Используем два массива с заголовками, один выводится в таблице, другой в кнопках на добавление колонок.
+  setTableHeaders(header) {
+    const currentIndexHeader = this._tableHeaders.indexOf(header);
+    const indexRemovedHeader = this._removedHeaders.indexOf(header);
+
+    if (currentIndexHeader > indexRemovedHeader && this._tableHeaders.length !== 1) {
+      this._tableHeaders.splice(currentIndexHeader, 1);
+      this._removedHeaders.push(header);
+    }
+
+    if (currentIndexHeader < indexRemovedHeader) {
+      this._tableHeaders.push(header);
+      this._removedHeaders.splice(indexRemovedHeader, 1);
+    }
+  }
+
+  // Изменяем данные по id юзера.
   changeUsers(userData) {
     this._user = {...this._user, ...userData};
     this._users = this._users.map(user => {
@@ -72,6 +88,14 @@ class TableModel {
 
   getPageNumber() {
     return this._pageNumber;
+  }
+
+  getTableHeaders() {
+    return this._tableHeaders;
+  }
+
+  getRemovedHeaders() {
+    return this._removedHeaders;
   }
 }
 
