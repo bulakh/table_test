@@ -12,12 +12,14 @@ const createFormTemplate = (user, headers) => {
   })
 
   return `<form class="table-form">
-    <button class="button-close" type="button">Close</button>
+    <button class="button-close cross" type="button"></button>
     <ul class="table-form__list">
       ${formItems.join('')}
     </ul>
-    <button class="button-close" type="button">Cancel</button>
-    <button class="button-submit" type="submit">Change</button>
+    <div class='table-form__buttons'>
+      <button class="table__btn button-close" type="button">Cancel</button>
+      <button class="table__btn button-submit" type="submit">Change</button>
+    </div>
   </form>`
 }
 

@@ -1,7 +1,7 @@
 import Abstract from "./Abstract";
 
 const createButtonsAddTemplate = (headers) => {
-  const buttonItems = headers.map(header => `<li><button type="button" name='${header}' class='nav__btn'>Add ${header}</button></li>`)
+  const buttonItems = headers.map(header => `<li><button type="button" name='${header}' class='table__btn nav__btn'>Add ${header}</button></li>`)
 
   return `<ul class='nav__list'>
     ${buttonItems.join('')}

@@ -85,6 +85,7 @@ class TablePresenter {
     this.renderTable();
     this.setCountSymbols();
     this._removeForm();
+    this._navigationPresenter.renderSort();
   }
 
   _removeForm() {

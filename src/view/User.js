@@ -6,7 +6,11 @@ const createUserTemplate = (user, count, headers) => {
       return `<td class='block-about' data-name='about'>${user.about.slice(0, count)}...</td>`
     }
 
-    return `<td style='${header === 'eyeColor' ? `color: ${user.eyeColor}; background:${user.eyeColor}` : ''}' data-name='${header}'>${user[header] || user.name[header]}</td>`
+    if (header === 'eyeColor') {
+      return `<td style='color: ${user.eyeColor}; background:${user.eyeColor}' data-name='${header}'>${user.eyeColor}</td>`
+    }
+
+    return `<td data-name='${header}'>${user[header] || user.name[header]}</td>`
   });
 
   return `<tr class="table__row" data-id="${user.id}">

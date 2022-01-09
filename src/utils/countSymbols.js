@@ -29,7 +29,5 @@ export const calcCountSymbols = (count) => {
     count -= 10;
   }
 
-  console.log('widthOfBlockUtil', widthBlockAbout);
-
   return count;
 }

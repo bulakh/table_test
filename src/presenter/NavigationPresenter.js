@@ -61,7 +61,6 @@ class NavigationPresenter {
   }
 
   _changePageNumber(e) {
-
     this._model.setPageNumber(e.target.value);
     this._pageNumber = this._model.getPageNumber();
 

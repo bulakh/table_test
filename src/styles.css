@@ -2,6 +2,7 @@
 
 :root {
   --black: #00001a;
+  --white: #fff;
   --grey: #eaeafb;
   --purple: #f5d3ff;
 }
@@ -46,6 +47,30 @@ ul {
   margin: 0;
 }
 
+button {
+  background: transparent;
+  border: none;
+}
+
+button:hover {
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.table__btn {
+  font-family: inherit;
+  font-size: 15px;
+  padding: 5px;
+  border: 1px solid var(--black);
+  border-radius: 5px;
+  /* background: var(--black); */
+}
+
+.table__btn:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
 .table-wrap {
   display: grid;
   grid-template-columns: 50% 40%;
@@ -56,18 +81,16 @@ ul {
   gap: 1% 2.5%;
 }
 
-.table-wrap__main {
-  /* width: 50%; */
-}
-
 .header {
   text-align: center;
 }
 
+/* Navigation header */
+
 .nav {
   display: flex;
   justify-content: space-between;
-
+  align-items: flex-end;
   margin-bottom: 15px;
 }
 
@@ -75,6 +98,23 @@ ul {
   display: flex;
   gap: 5px;
 }
+
+/* Sort */
+
+.select-wrap {
+  display: inline-block;
+  font-size: 17px;
+}
+
+.sort {
+  font-family: inherit;
+  font-size: 16px;
+  background: transparent;
+}
+
+
+
+/* Table */
 
 .table {
   grid-area: table;
@@ -97,23 +137,19 @@ ul {
   cursor: pointer;
 }
 
-
-
 .table__row:hover {
   cursor: pointer;
   background-color: var(--grey);
 }
 
-.select-wrap {
-  display: inline-block;
-}
-
 /* Form */
 
 .table-form {
+  position: relative;
+
   grid-area: form;
-  margin-top: 113px;
-  padding: 30px;
+  margin-top: 114px;
+  padding: 39px;
 
   border: 1px solid var(--black);
   border-radius: 5px;
@@ -132,10 +168,37 @@ ul {
 
 .table-form__input {
   flex-grow: 1;
+
+  font-family: inherit;
+  font-size: 15px;
 }
 
 .table-form__input--textarea {
   height: 180px;
+}
+
+.table-form__buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Close cross */
+
+.cross {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  width: 20px;
+  height: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none'%3E%3Cpath fill='%2300001A' d='M0 17.3501 17.777735-.000047l2.222213 2.168765L2.222213 19.518865z'/%3E%3Cpath fill='%2300001A' d='m2.22229.481201 17.777735 17.350147-2.222213 2.168765L.000077 2.649966z'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+.cross:hover {
+  opacity: 1;
+
 }
 
 /* Pagination */
@@ -168,6 +231,8 @@ ul {
 
 .pagination__btn:hover {
   background-color: var(--black);
-  color: white;
+  color: var(--white);
   transition: all 0.5s;
 }
+
+
