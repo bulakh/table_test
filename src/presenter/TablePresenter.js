@@ -57,7 +57,10 @@ class TablePresenter {
     this._removeForm();
 
     this._tableComponent.setClickOpenFormHandler(this._renderForm);
+    this._tableComponent.setKeydownEnterOpenFormHandler(this._renderForm);
     this._tableComponent.setClickRemoveColumnHandler(this._removeAddColumn);
+    this._tableComponent.setKeydownEnterRemoveColumnHandler(this._removeAddColumn);
+
   }
 
   _renderForm(e) {

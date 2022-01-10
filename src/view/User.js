@@ -21,7 +21,7 @@ const createUserTemplate = (user, count, headers) => {
     return `<td data-name='${header}'>${user[header] || name[header]}</td>`
   });
 
-  return `<tr class="table__row" data-id="${id}">
+  return `<tr tabindex='0' class="table__row" data-id="${id}">
     ${tableData.join('')}
   </tr>`
 }
