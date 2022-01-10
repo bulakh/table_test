@@ -29,7 +29,7 @@ class NavigationPresenter {
   }
 
   //Методы в момент инициализации презентера
-  //Параметр другой презентер из которого нам нужны методы.
+  //Параметр - другой презентер из которого нам нужны методы.
   init(tablePresenter) {
     this.renderSort();
     this._renderPagination();
